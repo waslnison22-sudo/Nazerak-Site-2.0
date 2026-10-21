@@ -2,7 +2,7 @@ name: First version QA
 
 on:
   push:
-    branches: ["main", "work/first-working-version"]
+    branches: ["main", "work/first-working-version", "work/local-preview-smoke"]
   pull_request:
     branches: ["main"]
 
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  static-qa:
+  static-and-route-qa:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,3 +21,5 @@ jobs:
           node-version: 22
       - name: Static checks
         run: node scripts/qa-checks.mjs
+      - name: Local HTTP route smoke test
+        run: node scripts/preview-smoke.mjs
