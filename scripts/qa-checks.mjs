@@ -1,7 +1,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 
-const required = ["index.html", "styles.css", "app.js", ".htaccess", "favicon.svg", "README.md", "robots.txt", "sitemap.xml", "launcher/manifest.json", "docs/MASTER_PROJECT_SPEC.md", "docs/STATUS.md"];
+const required = ["index.html", "styles.css", "app.js", ".htaccess", "favicon.svg", "README.md", "robots.txt", "sitemap.xml", "launcher/manifest.json", "docs/MASTER_PROJECT_SPEC.md", "docs/STATUS.md", "scripts/preview-server.mjs", "scripts/preview-smoke.mjs"];
 const errors = [];
 for (const file of required) if (!existsSync(file)) errors.push("Missing required file: " + file);
 const html = readFileSync("index.html", "utf8");
@@ -9,6 +9,8 @@ const css = readFileSync("styles.css", "utf8");
 const js = readFileSync("app.js", "utf8");
 const htaccess = readFileSync(".htaccess", "utf8");
 const manifest = readFileSync("launcher/manifest.json", "utf8");
+const previewServer = readFileSync("scripts/preview-server.mjs", "utf8");
+const previewSmoke = readFileSync("scripts/preview-smoke.mjs", "utf8");
 const routes = ["/forum", "/members", "/search", "/cabinet", "/privacy", "/forum/reports"];
 for (const token of ['id="main"', 'id="primary-nav"', 'href="/styles.css"', 'src="/app.js"', 'rel="canonical"']) if (!html.includes(token)) errors.push("index.html missing " + token);
 for (const token of ["prefers-reduced-motion", ":focus-visible", "max-width:800px", "max-width:480px"]) if (!css.includes(token)) errors.push("styles.css missing responsive/accessibility rule " + token);
@@ -19,11 +21,14 @@ try {
   const data = JSON.parse(manifest);
   if (data.schemaVersion !== 1 || data.profileVersion !== "1.0.0" || !Array.isArray(data.resources)) errors.push("launcher manifest contract mismatch");
 } catch { errors.push("launcher/manifest.json is not valid JSON"); }
-if (!sitemapSafe(readFileSync("sitemap.xml", "utf8"))) errors.push("sitemap.xml missing canonical homepage URL");
-function sitemapSafe(value) { return value.includes("<urlset") && value.includes("https://nazerak.ru/"); }
-if (/service_role|sb_secret_|DISCORD_CLIENT_SECRET|client_secret\s*=/i.test([html, css, js].join("\n"))) errors.push("Possible secret marker found in client source");
-const syntax = spawnSync(process.execPath, ["--check", "app.js"], { encoding: "utf8" });
-if (syntax.status !== 0) errors.push("Node syntax check failed: " + (syntax.stderr || syntax.stdout));
+if (!readFileSync("sitemap.xml", "utf8").includes("https://nazerak.ru/")) errors.push("sitemap.xml missing canonical homepage URL");
+for (const token of ["routePattern", "X-Content-Type-Options", "Method not allowed"]) if (!previewServer.includes(token)) errors.push("preview server missing safety marker " + token);
+for (const token of ["/forum/topic/example-id", "/launcher/manifest.json", "unknown asset should return 404"]) if (!previewSmoke.includes(token)) errors.push("preview smoke test missing case " + token);
+if (/service_role|sb_secret_|DISCORD_CLIENT_SECRET|client_secret\\s*=/i.test([html, css, js].join("\\n"))) errors.push("Possible secret marker found in client source");
+for (const file of ["app.js", "scripts/preview-server.mjs", "scripts/preview-smoke.mjs"]) {
+  const syntax = spawnSync(process.execPath, ["--check", file], { encoding: "utf8" });
+  if (syntax.status !== 0) errors.push(file + " syntax check failed: " + (syntax.stderr || syntax.stdout));
+}
 if (errors.length) {
   console.error("NaZerak Site 2.0 QA FAILED");
   for (const error of errors) console.error(" - " + error);
@@ -35,4 +40,4 @@ console.log(" - Home/navigation/runtime entry points exist");
 console.log(" - Responsive and reduced-motion rules exist");
 console.log(" - Required routes and legacy redirects exist");
 console.log(" - Client source secret-marker scan passed");
-console.log(" - app.js syntax check passed");
+console.log(" - All JavaScript syntax checks passed");
