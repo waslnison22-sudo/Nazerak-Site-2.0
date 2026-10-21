@@ -17,7 +17,7 @@ function escapeHTML(value) {
 function routeInfo() {
   const url = new URL(location.href);
   const path = url.pathname.replace(/\/+$/, "") || "/";
-  if (path.startsWith("/forum/topic/")) return {name:"topic", id:decodeURIComponent(path.slice(12))};
+  if (path.startsWith("/forum/topic/")) return {name:"topic", id:decodeURIComponent(path.slice(13))};
   if (path.startsWith("/user/")) return {name:"user", id:decodeURIComponent(path.slice(6))};
   if (path.startsWith("/forum/") && path !== "/forum/reports") return {name:"category", slug:decodeURIComponent(path.slice(7))};
   if (knownRoutes.includes(path)) return {name:path === "/" ? "home" : path.slice(1), path, search:url.searchParams};
