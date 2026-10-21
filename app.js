@@ -75,6 +75,7 @@ function homePage() {
    <div class="install-note" data-reveal><span class="install-note-mark">i</span><p><strong>Важно:</strong> используйте только адрес сервера, опубликованный в официальных каналах NaZerak. Если подключение не удаётся, проверьте версию игры и обратитесь в Discord.</p></div>
    <div class="community-cta" data-reveal><div><p class="section-kicker">ТЫ НЕ ОДИН</p><h3>Увидимся в Discord.</h3><p>Новости проекта, помощь с подключением и общение с сообществом.</p></div><a class="button button-primary" href="${DISCORD_URL}" target="_blank" rel="noopener noreferrer">Присоединиться <span aria-hidden="true">↗</span></a></div>
  </div></section>
+`;
 }
 
 function searchPage(initial) {
