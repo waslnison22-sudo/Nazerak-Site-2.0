@@ -9,7 +9,7 @@ await mkdir(out, { recursive: true });
 for (const file of ["styles.css", "favicon.svg", "robots.txt", "sitemap.xml"]) await copyFile(resolve(root, file), resolve(out, file));
 await cp(resolve(root, "launcher"), resolve(out, "launcher"), { recursive: true });
 let html = await readFile(resolve(root, "index.html"), "utf8");
-html = html.replace('href="/favicon.svg"', 'href="' + base + '/favicon.svg"').replace(/href="\\/styles\\.css(?:\\?[^"]*)?"/, 'href="' + base + '/styles.css?v=20261021-2"').replace(/src="\\/app\\.js(?:\\?[^"]*)?"/, 'src="' + base + '/app.js?v=20261021-2"');
+html = html.replace('href="/favicon.svg"', 'href="' + base + '/favicon.svg"').replace('href="/styles.css?v=20261021-2"', 'href="' + base + '/styles.css?v=20261021-2"').replace('src="/app.js"', 'src="' + base + '/app.js?v=20261021-2"');
 await writeFile(resolve(out, "index.html"), html);
 await copyFile(resolve(root, "app.js"), resolve(out, "app.js"));
 await writeFile(resolve(out, "404.html"), html);
