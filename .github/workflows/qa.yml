@@ -21,5 +21,7 @@ jobs:
           node-version: 22
       - name: Static checks
         run: node scripts/qa-checks.mjs
+      - name: GitHub Pages build smoke test
+        run: node scripts/build-pages.mjs
       - name: Local HTTP route smoke test
         run: node scripts/preview-smoke.mjs
