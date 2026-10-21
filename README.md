@@ -52,3 +52,7 @@ node scripts/preview-smoke.mjs
 - Перед релизом провести браузерные, accessibility, auth, RLS и deploy smoke tests.
 
 Подробное ТЗ: docs/MASTER_PROJECT_SPEC.md. Текущий статус: docs/STATUS.md.
+
+## Источник фонового изображения
+
+Для главного hero-блока используется изображение Minecraft Forest Lake 4K Wallpaper, заявленное источником в разрешении 3840 × 2160. Страница источника: https://www.wallpaperalchemy.com/wallpaper/minecraft-forest-lake-4k-wallpaper-357. Прямая ссылка на файл используется в `styles.css`. Изображение загружается с внешнего хоста, поэтому для его отображения требуется доступ к `server.wallpaperalchemy.com`.
