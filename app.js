@@ -41,13 +41,37 @@ const categories = [
   ["soobshchestvo","Сообщество","Общение игроков и темы вне основных разделов."]
 ];
 function homePage() {
- return "<section class='hero'><div class='container hero-inner'><p class='eyebrow'>MINECRAFT · ROLEPLAY · COMMUNITY</p><h1>Свой мир.<br><em>Своя история.</em></h1><p class='hero-copy'>NaZerak — русскоязычный Minecraft-проект, где игроки создают собственные истории, развивают организации и меняют общий игровой мир.</p><div class='hero-actions'><a class='button button-primary' href='#connect' data-scroll-connect>Подключиться к серверу ↗</a><a class='button button-secondary' href='#about' data-scroll-about>О проекте →</a></div></div></section>"+
- "<section class='section' id='about'><div class='container'><div class='section-heading'><div><p class='section-kicker'>О НАС</p><h2>Больше, чем просто сервер.</h2></div><p>NaZerak — пространство для ролевых историй, организаций и решений, которые меняют общий игровой мир.</p></div><div class='feature-grid'>"+
- "<article class='feature-card'><span class='feature-number'>01</span><h3>Ролевая история</h3><p>Создавай персонажа, принимай решения и развивай свою историю в общем мире.</p></article>"+
- "<article class='feature-card'><span class='feature-number'>02</span><h3>Организации и государство</h3><p>Участвуй в работе организаций, общественной жизни и развитии игровых институтов.</p></article>"+
- "<article class='feature-card'><span class='feature-number'>03</span><h3>Сообщество</h3><p>Знакомься с игроками и создавай истории вместе с сообществом NaZerak.</p></article></div></div></section>"+
- "<section class='section' id='connect'><div class='container'><div class='server-panel'><div><p class='section-kicker'>ПОДКЛЮЧЕНИЕ</p><h2>Выбирай, как войти в NaZerak.</h2><p>Minecraft Java Edition · версия 1.21.11</p><div class='server-address'><code>"+SERVER_IP+"</code><button class='button button-secondary' type='button' data-copy-ip>Подключиться по IP · копировать</button></div></div><div class='connect-actions'><button class='button button-primary' type='button' data-stub='Собственный лаунчер NaZerak появится позже'>Собственный лаунчер · скоро</button><a class='button button-secondary' href='"+DISCORD_URL+"' target='_blank' rel='noopener noreferrer'>Официальный Discord ↗</a></div></div></div></section>";
+ return `
+ <section class="hero hero--autumn" aria-labelledby="hero-title">
+   <div class="hero-image" aria-hidden="true"></div><div class="hero-grain" aria-hidden="true"></div>
+   <div class="container hero-inner">
+     <div class="hero-content" data-reveal>
+       <p class="eyebrow"><span class="eyebrow-dot"></span> MINECRAFT · ROLEPLAY · COMMUNITY</p>
+       <h1 id="hero-title">Мир, в котором<br><em>начинается твоё.</em></h1>
+       <p class="hero-copy">NaZerak — больше, чем игровой сервер. Это мир характеров, организаций и историй, которые создаются вместе с тобой.</p>
+       <div class="hero-actions"><a class="button button-primary" href="#connect" data-scroll-connect>Войти в мир <span aria-hidden="true">↗</span></a><a class="button button-glass" href="#about" data-scroll-about>Открыть NaZerak <span aria-hidden="true">↓</span></a></div>
+       <div class="hero-meta"><span class="meta-mark"></span><span>Minecraft Java Edition</span><i></i><span>Версия 1.21.11</span></div>
+     </div>
+     <div class="hero-side-note" data-reveal data-reveal-delay="180"><span class="side-note-line"></span><span>ТВОЯ ИСТОРИЯ<br>НАЧИНАЕТСЯ ЗДЕСЬ</span><span class="side-note-index">N / 01</span></div>
+   </div>
+   <a class="scroll-cue" href="#about" data-scroll-about aria-label="Прокрутить к разделу о проекте"><span></span><small>ЛИСТАЙ НИЖЕ</small></a>
+ </section>
+ <section class="intro-section section" id="about"><div class="container">
+   <div class="intro-top" data-reveal><p class="section-kicker">01 / ФИЛОСОФИЯ ПРОЕКТА</p><p class="intro-aside">Не просто заходи в игру.<br><strong>Стань частью мира.</strong></p></div>
+   <div class="intro-head" data-reveal><h2>Каждый выбор<br>оставляет <em>след.</em></h2><p>Здесь мир не заканчивается за пределами твоего дома. Он живёт в людях, событиях, решениях и историях, которые игроки создают вместе.</p></div>
+   <div class="feature-grid feature-grid--editorial">
+     <article class="feature-card feature-card--lead" data-reveal><span class="feature-number">01 <i>— ИСТОРИЯ</i></span><div class="feature-icon feature-icon--story" aria-hidden="true">↗</div><h3>Твоя роль.<br>Твои решения.</h3><p>Создай персонажа, найди своё место и преврати обычные игровые дни в историю, которую захочется продолжить.</p><span class="card-index">N / 01</span></article>
+     <article class="feature-card feature-card--org" data-reveal data-reveal-delay="100"><span class="feature-number">02 <i>— СИСТЕМА</i></span><div class="feature-icon feature-icon--org" aria-hidden="true">⌘</div><h3>Организации<br>и государство.</h3><p>Участвуй в жизни организаций, строй связи и влияй на развитие общего мира.</p><span class="card-index">N / 02</span></article>
+     <article class="feature-card feature-card--community" data-reveal data-reveal-delay="200"><span class="feature-number">03 <i>— ЛЮДИ</i></span><div class="feature-icon feature-icon--community" aria-hidden="true">◎</div><h3>Мир создают<br>люди.</h3><p>Знакомься, объединяйся и создавай совместные истории с сообществом NaZerak.</p><span class="card-index">N / 03</span></article>
+   </div>
+ </div></section>
+ <section class="world-section" aria-label="Мир NaZerak"><div class="world-backdrop" aria-hidden="true"></div><div class="container world-inner" data-reveal><p class="section-kicker">02 / ТВОЯ ГЛАВА</p><h2>У этого мира<br>нет готового <em>сценария.</em></h2><p>Он пишется поступками игроков. Начни с малого — и однажды именно твоя история станет частью NaZerak.</p><a class="text-link" href="#connect" data-scroll-connect>Начать свою историю <span aria-hidden="true">↗</span></a><div class="world-coordinate">45° 02′ N&nbsp;&nbsp; / &nbsp;&nbsp;N·ZK</div></div></section>
+ <section class="connect-section section" id="connect"><div class="container"><div class="connect-heading" data-reveal><p class="section-kicker">03 / ПЕРВЫЙ ШАГ</p><h2>Твой путь в NaZerak<br><em>начинается здесь.</em></h2><p>Подключайся к миру, выбирай свой путь и пиши историю вместе с другими игроками.</p></div>
+   <div class="server-panel server-panel--premium" data-reveal><div class="server-panel-main"><div class="server-label"><span class="server-live-dot"></span> ПОДКЛЮЧЕНИЕ К СЕРВЕРУ</div><h3>Встречаемся<br>в игровом мире.</h3><p>Minecraft Java Edition <span>·</span> 1.21.11</p><div class="server-address"><code>${SERVER_IP}</code><button class="button button-primary copy-button" type="button" data-copy-ip aria-label="Скопировать IP сервера">Копировать IP <span aria-hidden="true">↗</span></button></div></div>
+     <div class="connect-actions"><div class="connect-option"><span class="option-number">01</span><div><strong>Свой лаунчер</strong><small>Скоро появится</small></div><button class="option-arrow" type="button" data-stub="Собственный лаунчер NaZerak появится позже" aria-label="Информация о лаунчере">↗</button></div><a class="connect-option" href="${DISCORD_URL}" target="_blank" rel="noopener noreferrer"><span class="option-number">02</span><div><strong>Discord-сообщество</strong><small>Новости и общение</small></div><span class="option-arrow" aria-hidden="true">↗</span></a></div>
+   </div><p class="connect-footnote" data-reveal>NAZERAK — СОЗДАЁМ МИР ВМЕСТЕ <span>·</span> ОФИЦИАЛЬНЫЙ САЙТ ПРОЕКТА</p></div></section>`;
 }
+
 function searchPage(initial) {
  return "<div class='page-shell'>"+heading("ПОИСК","Найти на NaZerak","Поиск по форуму, темам и публичным профилям.")+"<form class='search-bar' id='site-search'><input class='search-input' name='q' type='search' placeholder='Что ищем?' value='"+escapeHTML(initial)+"' aria-label='Поисковый запрос'><button class='button button-primary' type='submit'>Найти</button></form><div class='empty-state'><strong>Поиск подключается</strong><p>Поле работает, но результаты не придумываются и небезопасные запросы к базе не выполняются.</p></div></div>";
 }
