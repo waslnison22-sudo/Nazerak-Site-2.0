@@ -1,0 +1,20 @@
+import { mkdir, readFile, writeFile, copyFile, cp, access } from "node:fs/promises";
+import { constants } from "node:fs";
+import { resolve } from "node:path";
+
+const root = process.cwd();
+const out = resolve(root, "dist");
+const base = "/Nazerak-Site-2.0";
+await mkdir(out, { recursive: true });
+for (const file of ["styles.css", "favicon.svg", "robots.txt", "sitemap.xml"]) await copyFile(resolve(root, file), resolve(out, file));
+await cp(resolve(root, "launcher"), resolve(out, "launcher"), { recursive: true });
+let html = await readFile(resolve(root, "index.html"), "utf8");
+html = html.replace('href="/favicon.svg"', 'href="' + base + '/favicon.svg"').replace('href="/styles.css"', 'href="' + base + '/styles.css"').replace('src="/app.js"', 'src="' + base + '/app.js"');
+await writeFile(resolve(out, "index.html"), html);
+await copyFile(resolve(root, "app.js"), resolve(out, "app.js"));
+await writeFile(resolve(out, "404.html"), html);
+await writeFile(resolve(out, ".nojekyll"), "");
+for (const file of ["index.html", "404.html", "app.js", "styles.css", "favicon.svg", "launcher/manifest.json"]) await access(resolve(out, file), constants.R_OK);
+const builtHtml = await readFile(resolve(out, "index.html"), "utf8");
+if (!builtHtml.includes(base + "/styles.css") || !builtHtml.includes(base + "/app.js")) throw new Error("GitHub Pages base-path rewrite failed");
+console.log("GitHub Pages build passed: base path, static assets, launcher manifest and SPA 404 fallback are ready.");
