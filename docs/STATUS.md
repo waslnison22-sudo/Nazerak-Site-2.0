@@ -5,7 +5,8 @@ Updated: 2026-10-21
 ## Delivered in the first version
 - Separate repository: https://github.com/waslnison22-sudo/Nazerak-Site-2.0
 - Responsive home page, navigation, clean-route renderer and honest page states.
-- Home, forum, six category pages, members, search, cabinet, reports, topic, public profile, privacy and 404.
+- Home, About section, search, privacy and 404.
+- Forum and members catalog removed from the visible interface; cabinet and launcher are non-functional placeholder controls.
 - Copy-IP interaction, mobile menu, Escape handling, focus-visible and reduced-motion support.
 - Apache clean routes plus redirects for legacy .html URLs.
 - Existing launcher manifest schema preserved exactly.
@@ -25,7 +26,7 @@ Updated: 2026-10-21
 - NOT RUN — production deploy; no deployment attempted.
 
 ## Important limitations
-Forum topics, member data, search results, profiles, moderation and account authentication are scaffolds and do not query Supabase yet. The existing Supabase project was not changed. OAuth remains disabled until exact live redirect configuration is checked. The selected autumn image is referenced from the existing production domain; it was not copied into this repository or regenerated.
+Forum topics, member data, search results, profiles, moderation and account authentication are scaffolds and do not query Supabase yet. The existing Supabase project was not changed. OAuth remains disabled until exact live redirect configuration is checked. The hero uses an external 4K Minecraft forest image with a cache-busting query string; the image is not stored in the repository. The production domain remains untouched.
 
 ## Next batches
 1. Review actual rendered layout in a browser and add responsive screenshots.
