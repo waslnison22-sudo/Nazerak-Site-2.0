@@ -84,6 +84,21 @@ function render(){
  }
  root.innerHTML=html;
  applyBasePathLinks();
+ const revealItems = root.querySelectorAll("[data-reveal]");
+ revealItems.forEach(item => item.style.setProperty("--reveal-delay", (Number(item.dataset.revealDelay) || 0) + "ms"));
+ if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+   const revealObserver = new IntersectionObserver(entries => {
+     entries.forEach(entry => {
+       if (entry.isIntersecting) {
+         entry.target.classList.add("is-visible");
+         revealObserver.unobserve(entry.target);
+       }
+     });
+   }, { threshold: 0.12, rootMargin: "0px 0px -35px 0px" });
+   revealItems.forEach(item => revealObserver.observe(item));
+ } else {
+   revealItems.forEach(item => item.classList.add("is-visible"));
+ }
  nav.querySelectorAll("[data-route]").forEach(link=>{const href=link.getAttribute("data-route");const active=href===r.path||(r.name==="category"&&href==="/forum")||(r.name==="topic"&&href==="/forum");if(active)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
  nav.classList.remove("is-open");menuToggle.setAttribute("aria-expanded","false");
  const form=document.querySelector("#site-search");
