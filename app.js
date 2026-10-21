@@ -1,3 +1,4 @@
+const BASE_PATH = location.hostname.endsWith("github.io") ? "/Nazerak-Site-2.0" : "";
 const SERVER_IP = "nazehard.rustix.cc";
 const DISCORD_URL = "https://discord.gg/2KvsYYDHN6";
 const root = document.querySelector("#main");
@@ -16,12 +17,20 @@ function escapeHTML(value) {
 }
 function routeInfo() {
   const url = new URL(location.href);
-  const path = url.pathname.replace(/\/+$/, "") || "/";
+  const rawPath = url.pathname;
+  const path = (BASE_PATH && rawPath.startsWith(BASE_PATH) ? rawPath.slice(BASE_PATH.length) : rawPath).replace(/\/+$/, "") || "/";
   if (path.startsWith("/forum/topic/")) return {name:"topic", id:decodeURIComponent(path.slice(13))};
   if (path.startsWith("/user/")) return {name:"user", id:decodeURIComponent(path.slice(6))};
   if (path.startsWith("/forum/") && path !== "/forum/reports") return {name:"category", slug:decodeURIComponent(path.slice(7))};
   if (knownRoutes.includes(path)) return {name:path === "/" ? "home" : path.slice(1), path, search:url.searchParams};
   return {name:"notfound",path};
+}
+function applyBasePathLinks(){
+ if(!BASE_PATH) return;
+ document.querySelectorAll('a[href^="/"]').forEach(link=>{
+  const href=link.getAttribute("href");
+  if(href && href!==BASE_PATH && !href.startsWith(BASE_PATH+"/")) link.setAttribute("href",BASE_PATH+href);
+ });
 }
 function heading(kicker,title,description) {
   return "<header class='page-heading'><p class='section-kicker'>"+kicker+"</p><h1>"+title+"</h1>"+(description?"<p>"+description+"</p>":"")+"</header>";
@@ -73,10 +82,11 @@ function render(){
  case "forum/reports":html=reportsPage();break;case "topic":html=topicPage(r.id);break;case "user":html=userPage(r.id);break;case "privacy":html=privacyPage();break;default:html=notFoundPage();
  }
  root.innerHTML=html;
+ applyBasePathLinks();
  nav.querySelectorAll("[data-route]").forEach(link=>{const href=link.getAttribute("data-route");const active=href===r.path||(r.name==="category"&&href==="/forum")||(r.name==="topic"&&href==="/forum");if(active)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
  nav.classList.remove("is-open");menuToggle.setAttribute("aria-expanded","false");
  const form=document.querySelector("#site-search");
- if(form)form.addEventListener("submit",event=>{event.preventDefault();const q=new FormData(form).get("q").toString().trim();const url=new URL("/search",location.origin);if(q)url.searchParams.set("q",q);history.pushState({},"",url);render();});
+ if(form)form.addEventListener("submit",event=>{event.preventDefault();const q=new FormData(form).get("q").toString().trim();const url=new URL(BASE_PATH+"/search",location.origin);if(q)url.searchParams.set("q",q);history.pushState({},"",url);render();});
 }
 document.addEventListener("click",async event=>{
  const link=event.target.closest("a[data-route]");
