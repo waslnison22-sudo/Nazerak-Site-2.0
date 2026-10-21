@@ -16,5 +16,5 @@ await writeFile(resolve(out, "404.html"), html);
 await writeFile(resolve(out, ".nojekyll"), "");
 for (const file of ["index.html", "404.html", "app.js", "styles.css", "favicon.svg", "launcher/manifest.json"]) await access(resolve(out, file), constants.R_OK);
 const builtHtml = await readFile(resolve(out, "index.html"), "utf8");
-if (!builtHtml.includes("./styles.css?v=20261022-1") || !builtHtml.includes("./app.js?v=20261022-1") || !builtHtml.includes('href="./#about"')) throw new Error("GitHub Pages relative asset paths failed");
+if (!builtHtml.includes("./styles.css?v=20261022-2") || !builtHtml.includes("./app.js?v=20261022-2") || !builtHtml.includes('href="./#about"')) throw new Error("GitHub Pages relative asset paths failed");
 console.log("GitHub Pages build passed: base path, static assets, launcher manifest and SPA 404 fallback are ready.");
