@@ -4,17 +4,8 @@ const DISCORD_URL = "https://discord.gg/2KvsYYDHN6";
 const root = document.querySelector("#main");
 const nav = document.querySelector("#primary-nav");
 const menuToggle = document.querySelector(".menu-toggle");
-const toast = document.querySelector("#toast");
 document.querySelector("#year").textContent = String(new Date().getFullYear());
 const knownRoutes = ["/", "/cabinet"];
-let toastTimer;
-function showToast(message) {
-  toast.textContent = message; toast.hidden = false; clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toast.hidden = true; }, 2600);
-}
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
-}
 function routeInfo() {
   const url = new URL(location.href);
   const rawPath = url.pathname;
@@ -102,7 +93,6 @@ document.addEventListener("click",async event=>{
  const link=event.target.closest("a[data-route]");
  if(link&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&event.button===0){event.preventDefault();history.pushState({},"",link.getAttribute("href"));render();window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});return;}
  if(event.target.closest("[data-scroll-connect]")){const section=document.querySelector("#connect");if(section){event.preventDefault();section.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}}
-  if(event.target.closest("[data-stub]")){event.preventDefault();showToast(event.target.closest("[data-stub]").getAttribute("data-stub")||"Эта функция появится позже");return;}
   if(event.target.closest("[data-scroll-about]")){const section=document.querySelector("#about");if(section){event.preventDefault();section.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}else{event.preventDefault();location.href=BASE_PATH+"/#about";}}
 });
 menuToggle.addEventListener("click",()=>{const open=nav.classList.toggle("is-open");menuToggle.setAttribute("aria-expanded",String(open));});
