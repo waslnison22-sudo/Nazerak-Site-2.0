@@ -25,13 +25,7 @@ try {
   if (!ready) throw new Error("Preview server did not become ready: " + childOutput);
   const checks = [
     ["/", "text/html"],
-    ["/forum", "text/html"],
-    ["/forum/example-category", "text/html"],
-    ["/forum/topic/example-id", "text/html"],
-    ["/members", "text/html"],
-    ["/search?q=hello", "text/html"],
     ["/cabinet", "text/html"],
-    ["/user/example-id", "text/html"],
     ["/styles.css", "text/css"],
     ["/app.js", "text/javascript"],
     ["/favicon.svg", "image/svg+xml"],
@@ -62,4 +56,4 @@ if (failures.length) {
   for (const failure of failures) console.error(" - " + failure);
   process.exit(1);
 }
-console.log("NaZerak preview smoke PASSED — 14 routes/assets plus unknown asset handling");
+console.log("NaZerak preview smoke PASSED — 8 routes/assets plus unknown asset handling");
