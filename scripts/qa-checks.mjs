@@ -11,12 +11,12 @@ const htaccess = readFileSync(".htaccess", "utf8");
 const manifest = readFileSync("launcher/manifest.json", "utf8");
 const previewServer = readFileSync("scripts/preview-server.mjs", "utf8");
 const previewSmoke = readFileSync("scripts/preview-smoke.mjs", "utf8");
-const routes = ["/search", "/privacy"];
-for (const token of ['id="main"', 'id="primary-nav"', 'href="./styles.css?v=20261022-3"', 'src="./app.js?v=20261022-3"', 'rel="canonical"']) if (!html.includes(token)) errors.push("index.html missing " + token);
-for (const token of ["prefers-reduced-motion", ":focus-visible", "max-width:800px", "max-width:480px", "hero-drift", "scroll-line", "data-reveal", "feature-grid--editorial", "install-grid", "world-drift", "build-title", "--accent:#ff2942", "font-size:17px", "install-grid", "max-width:640px"]) if (!css.includes(token)) errors.push("styles.css missing responsive/accessibility rule " + token);
-for (const token of ["function homePage", "hero--autumn", "world-section", "install-grid", "IntersectionObserver", "function searchPage", "function privacyPage", "data-stub", "data-scroll-about", 'addEventListener("popstate"']) if (!js.includes(token)) errors.push("app.js missing feature marker " + token);
+const routes = ["/cabinet"];
+for (const token of ['id="main"', 'id="primary-nav"', 'href="./styles.css?v=20261022-4"', 'src="./app.js?v=20261022-4"', 'rel="canonical"']) if (!html.includes(token)) errors.push("index.html missing " + token);
+for (const token of ["prefers-reduced-motion", ":focus-visible", "max-width:800px", "max-width:480px", "hero-drift", "scroll-line", "data-reveal", "feature-grid--editorial", "install-grid", "world-drift",  "--accent:#ff2942", "font-size:17px", "install-grid", "nazerak-autumn-hero.webp"]) if (!css.includes(token)) errors.push("styles.css missing responsive/accessibility rule " + token);
+for (const token of ["function homePage", "hero--autumn", "world-section", "install-grid", "IntersectionObserver", "function cabinetPage", 'addEventListener("popstate"']) if (!js.includes(token)) errors.push("app.js missing feature marker " + token);
 for (const route of routes) if (!js.includes('"' + route + '"')) errors.push("app.js missing route " + route);
-for (const token of ["function forumPage", "function membersPage", "function cabinetPage", 'case "forum"', 'case "cabinet"']) if (js.includes(token)) errors.push("unfinished page route still exists: " + token);
+for (const token of ["function forumPage", "function membersPage", "function searchPage", "function privacyPage", 'case "forum"', 'case "search"', 'case "privacy"']) if (js.includes(token)) errors.push("unfinished page route still exists: " + token);
 for (const token of ["forum-category\\.html", "topic\\.html", "forum-user\\.html", "RewriteRule ^forum/topic/"]) if (!htaccess.includes(token)) errors.push(".htaccess missing compatibility rule " + token);
 try {
   const data = JSON.parse(manifest);
