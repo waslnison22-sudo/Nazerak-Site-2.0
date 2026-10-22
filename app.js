@@ -6,7 +6,7 @@ const nav = document.querySelector("#primary-nav");
 const menuToggle = document.querySelector(".menu-toggle");
 const toast = document.querySelector("#toast");
 document.querySelector("#year").textContent = String(new Date().getFullYear());
-const knownRoutes = ["/", "/search", "/privacy"];
+const knownRoutes = ["/", "/cabinet"];
 let toastTimer;
 function showToast(message) {
   toast.textContent = message; toast.hidden = false; clearTimeout(toastTimer);
@@ -32,14 +32,6 @@ function applyBasePathLinks(){
 function heading(kicker,title,description) {
   return "<header class='page-heading'><p class='section-kicker'>"+kicker+"</p><h1>"+title+"</h1>"+(description?"<p>"+description+"</p>":"")+"</header>";
 }
-const categories = [
-  ["pravila-i-dokumenty","Информация и правила","Правила проекта, объявления и важные документы."],
-  ["gosudarstvo-i-organizacii","Государство и организации","Государственные органы, ведомства и игровые организации."],
-  ["igrovoi-mir","Игровой мир","Истории персонажей, игровые события и мир NaZerak."],
-  ["obrashcheniya-i-podderzhka","Обращения и поддержка","Вопросы, обращения и помощь сообщества."],
-  ["proekt-i-razvitie","Проект и развитие","Предложения, обновления и развитие проекта."],
-  ["soobshchestvo","Сообщество","Общение игроков и темы вне основных разделов."]
-];
 function homePage() {
  return `
  <section class="hero hero--autumn" aria-labelledby="hero-title">
@@ -78,15 +70,12 @@ function homePage() {
 `;
 }
 
-function searchPage(initial) {
- return "<div class='page-shell'>"+heading("ПОИСК","Найти на NaZerak","Поиск по форуму, темам и публичным профилям.")+"<form class='search-bar' id='site-search'><input class='search-input' name='q' type='search' placeholder='Что ищем?' value='"+escapeHTML(initial)+"' aria-label='Поисковый запрос'><button class='button button-primary' type='submit'>Найти</button></form><div class='empty-state'><strong>Поиск подключается</strong><p>Поле работает, но результаты не придумываются и небезопасные запросы к базе не выполняются.</p></div></div>";
-}
-function privacyPage(){return "<div class='page-shell'>"+heading("ДОКУМЕНТЫ","Конфиденциальность","Информация о данных и аккаунтах.")+"<div class='panel'><h2>Текущий статус</h2><p>Это временная информационная страница, а не завершённый юридический документ.</p><p>Планируется использовать существующий Supabase Auth с Discord. Сайт не должен раскрывать токены, OAuth-коды, приватные поля профиля или данные модерации.</p><p>Вопросы по проекту: <a class='inline-link' href='"+DISCORD_URL+"' target='_blank' rel='noopener noreferrer'>официальный Discord ↗</a>.</p></div></div>";}
+function cabinetPage(){return "<section class=\"cabinet-page page-shell\"><header class=\"page-heading\"><p class=\"section-kicker\">NaZerak</p><h1>Личный кабинет</h1><p>Твой профиль и настройки проекта — в одном месте.</p></header><div class=\"cabinet-card\"><div class=\"cabinet-mark\" aria-hidden=\"true\">N<span>/</span></div><h2>Войти в NaZerak</h2><p>Авторизация через Discord будет подключена после проверки настроек существующего аккаунта Supabase.</p><a class=\"button button-primary\" href=\""+DISCORD_URL+"\" target=\"_blank\" rel=\"noopener noreferrer\">Открыть Discord <span aria-hidden=\"true\">↗</span></a><a class=\"cabinet-back\" href=\"/\" data-route=\"/\">Вернуться на главную</a></div></section>";}
 function notFoundPage(){return "<div class='page-shell'><div class='empty-state'><strong>Страница не найдена</strong><p>Проверь адрес или вернись на главную NaZerak.</p><p style='margin-top:18px'><a class='button button-primary' href='/' data-route='/'>На главную</a></p></div></div>";}
 function render(){
  const r=routeInfo(); let html;
  switch(r.name){
- case "home":html=homePage();break;case "search":html=searchPage(r.search.get("q")||"");break;case "privacy":html=privacyPage();break;default:html=notFoundPage();
+ case "home":html=homePage();break;case "cabinet":html=cabinetPage();break;default:html=notFoundPage();
  }
  root.innerHTML=html;
  applyBasePathLinks();
@@ -105,10 +94,9 @@ function render(){
  } else {
    revealItems.forEach(item => item.classList.add("is-visible"));
  }
- nav.querySelectorAll("[data-route]").forEach(link=>{const href=link.getAttribute("data-route");const active=href===r.path||(r.name==="category"&&href==="/forum")||(r.name==="topic"&&href==="/forum");if(active)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
+ nav.querySelectorAll("[data-route]").forEach(link=>{const href=link.getAttribute("data-route");if(href===r.path)link.setAttribute("aria-current","page");else link.removeAttribute("aria-current");});
  nav.classList.remove("is-open");menuToggle.setAttribute("aria-expanded","false");
- const form=document.querySelector("#site-search");
- if(form)form.addEventListener("submit",event=>{event.preventDefault();const q=new FormData(form).get("q").toString().trim();const url=new URL(BASE_PATH+"/search",location.origin);if(q)url.searchParams.set("q",q);history.pushState({},"",url);render();});
+
 }
 document.addEventListener("click",async event=>{
  const link=event.target.closest("a[data-route]");
