@@ -93,7 +93,7 @@ html{scroll-padding-top:88px}
 h1 em,.display-title em,.hero--autumn h1 em,.intro-head h2 em,.world-inner h2 em,.connect-heading h2 em{background:none!important;color:var(--accent-hover)!important;-webkit-text-fill-color:var(--accent-hover)!important}
 .site-header:after{background:linear-gradient(90deg,transparent,var(--accent),rgba(255,95,116,.55),transparent)}
 .brand-mark{border-color:rgba(255,41,66,.42);background:linear-gradient(145deg,rgba(255,41,66,.2),rgba(20,20,24,.95))}
-.hero--autumn .hero-image{background-image:linear-gradient(90deg,rgba(6,8,10,.92),rgba(6,8,10,.56)),linear-gradient(0deg,#08090b 0%,transparent 60%),linear-gradient(180deg,#171a22 0 30%,#303a37 30% 48%,#202c25 48% 69%,#111614 69% 100%),repeating-linear-gradient(90deg,transparent 0 47px,rgba(255,255,255,.025) 48px 50px)!important}
+.hero--autumn .hero-image{background-image:linear-gradient(90deg,rgba(6,8,10,.78) 0%,rgba(6,8,10,.42) 48%,rgba(6,8,10,.12) 100%),linear-gradient(0deg,rgba(7,7,10,.82) 0%,transparent 56%),url("https://raw.githubusercontent.com/waslnison22-sudo/NazerakSites/main/assets/images/nazerak-autumn-hero.webp")!important;background-size:cover!important;background-position:center 48%!important;background-repeat:no-repeat!important}
 .button-primary{background:var(--accent);box-shadow:0 10px 32px rgba(255,41,66,.24)}
 .button-primary:hover{background:var(--accent-hover)}
 .install-step:after,.feature-grid--editorial .feature-card:after{background:linear-gradient(90deg,transparent,var(--accent),var(--accent-hover),transparent)}
@@ -186,3 +186,11 @@ body{font-size:17px;line-height:1.7}
  .footer-links{font-size:14px;gap:14px}
 }
 @media(prefers-reduced-motion:reduce){.hero--autumn .hero-image,.hero-content h1,.hero-content .eyebrow,.hero-content .hero-copy,.hero-content .hero-actions{animation:none!important}}
+
+/* Focused homepage + cabinet cleanup and mobile overflow guard */
+@media(max-width:800px){.hero-side-note,.scroll-cue{display:none}.hero-inner{grid-template-columns:minmax(0,1fr)}.hero-content{max-width:680px}.hero-meta{flex-wrap:wrap}.footer-links{flex-wrap:wrap}}
+.cabinet-page{min-height:calc(100svh - 190px);padding-top:clamp(44px,8vw,92px);padding-bottom:clamp(48px,8vw,96px)}
+.cabinet-page .page-heading{text-align:center;margin:0 auto 30px;max-width:760px}.cabinet-page .page-heading p{font-size:18px}
+.cabinet-card{max-width:520px;margin:0 auto;padding:clamp(24px,5vw,44px);border:1px solid rgba(255,255,255,.12);border-radius:24px;background:radial-gradient(ellipse at top,rgba(255,41,66,.12),transparent 62%),#101116;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.cabinet-mark{display:grid;place-items:center;width:58px;height:58px;border:1px solid rgba(255,41,66,.42);border-radius:18px;background:rgba(255,41,66,.12);font-size:24px;font-weight:800}.cabinet-mark span{color:var(--accent-hover)}.cabinet-card h2{font-size:clamp(24px,4vw,32px);margin:4px 0 0}.cabinet-card p{max-width:400px;margin:0;color:var(--muted);font-size:16px;line-height:1.75}.cabinet-card .button{margin-top:6px;min-height:52px}.cabinet-back{color:var(--muted);font-size:15px;text-underline-offset:4px}
+@media(max-width:480px){.hero--autumn{min-height:calc(100svh - 64px)}.hero-inner{padding:48px 0 56px}.hero-actions{display:grid;grid-template-columns:1fr}.hero-actions .button{width:100%;justify-content:center}.hero-meta{font-size:13px}.cabinet-page .page-heading p{font-size:16px}.cabinet-card{padding:24px 19px;border-radius:20px}.site-footer .footer-inner>p{font-size:15px}}
