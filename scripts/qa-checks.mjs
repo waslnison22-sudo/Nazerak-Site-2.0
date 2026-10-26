@@ -15,10 +15,10 @@ const previewSmoke = readFileSync("scripts/preview-smoke.mjs", "utf8");
 for (const token of ['id="main"', 'id="primary-nav"', 'href="./styles.css?v=20261026-1"', 'src="./app.js?v=20261026-1"', 'rel="canonical"']) {
   if (!html.includes(token)) errors.push("index.html missing " + token);
 }
-for (const token of ["prefers-reduced-motion", ":focus-visible", "max-width:800px", "max-width:480px", "data-reveal", "feature-grid--editorial", "launcher-download-panel", "--accent:#ff2942", "nazerak-autumn-hero.webp"]) {
+for (const token of ["prefers-reduced-motion", ":focus-visible", "max-width:800px", "max-width:480px", "data-reveal", "feature-grid--editorial", "launcher-download-panel", "block-explorer-grid", "--accent:#ff2942", "nazerak-autumn-hero.webp"]) {
   if (!css.includes(token)) errors.push("styles.css missing responsive/accessibility marker " + token);
 }
-for (const token of ["function homePage", "hero--autumn", "world-section", "launcher-download-panel", "IntersectionObserver", 'addEventListener("popstate"', "data-scroll-download"]) {
+for (const token of ["function homePage", "hero--autumn", "world-section", "launcher-download-panel", "block-explorer-grid", "data-world-block", "IntersectionObserver", 'addEventListener("popstate"', "data-scroll-download"]) {
   if (!js.includes(token)) errors.push("app.js missing feature marker " + token);
 }
 for (const token of ["nazehard.rustix.cc", "SERVER_IP", "function cabinetPage", "function forumPage", "function membersPage", "function searchPage", 'case "cabinet"']) {
