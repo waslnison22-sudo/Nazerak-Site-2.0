@@ -19,9 +19,6 @@ function applyBasePathLinks(){
   if(href && href!==BASE_PATH && !href.startsWith(BASE_PATH+"/")) link.setAttribute("href",BASE_PATH+href);
  });
 }
-function heading(kicker,title,description) {
-  return "<header class='page-heading'><p class='section-kicker'>"+kicker+"</p><h1>"+title+"</h1>"+(description?"<p>"+description+"</p>":"")+"</header>";
-}
 function homePage() {
  return `
  <section class="hero hero--autumn" aria-labelledby="hero-title">
@@ -58,7 +55,6 @@ function homePage() {
  </div></section>
 `;
 }
-function cabinetPage(){return "<section class=\"cabinet-page page-shell\"><header class=\"page-heading\"><p class=\"section-kicker\">NaZerak</p><h1>Личный кабинет</h1><p>Твой профиль и настройки проекта — в одном месте.</p></header><div class=\"cabinet-card\"><div class=\"cabinet-mark\" aria-hidden=\"true\">N<span>/</span></div><h2>Войти в NaZerak</h2><p>Авторизация через Discord будет подключена после проверки настроек существующего аккаунта Supabase.</p><a class=\"button button-primary\" href=\""+DISCORD_URL+"\" target=\"_blank\" rel=\"noopener noreferrer\">Открыть Discord <span aria-hidden=\"true\">↗</span></a><a class=\"cabinet-back\" href=\"/\" data-route=\"/\">Вернуться на главную</a></div></section>";}
 function notFoundPage(){return "<div class='page-shell'><div class='empty-state'><strong>Страница не найдена</strong><p>Проверь адрес или вернись на главную NaZerak.</p><p style='margin-top:18px'><a class='button button-primary' href='/' data-route='/'>На главную</a></p></div></div>";}
 function render(){
  const r=routeInfo(); let html;
