@@ -216,3 +216,33 @@ body{font-size:17px;line-height:1.7}
 @media(max-width:800px){.launcher-download-panel{grid-template-columns:64px minmax(0,1fr);gap:20px}.launcher-download-mark{width:60px;height:60px;border-radius:16px}.launcher-download-action{grid-column:1/-1;padding-top:4px}}
 @media(max-width:480px){.launcher-download-panel{grid-template-columns:1fr;gap:18px}.launcher-download-mark{width:54px;height:54px}.launcher-download-action{grid-column:auto}.launcher-download-action .button{width:100%;justify-content:center}.hero:before{background-position:57% center;background-image:linear-gradient(90deg,rgba(7,7,10,.82),rgba(7,7,10,.52)),linear-gradient(0deg,#07070a 0%,transparent 60%),url("https://raw.githubusercontent.com/waslnison22-sudo/NazerakSites/main/assets/images/nazerak-autumn-hero.webp")}}
 @media(prefers-reduced-motion:reduce){.hero:before{transform:none!important}}
+
+
+/* Lightweight CSS-built Minecraft block explorer */
+.block-explorer{position:relative;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:radial-gradient(ellipse at 50% 10%,rgba(255,41,66,.055),transparent 52%),#090a0e}
+.block-explorer .container{padding-block:clamp(64px,9vw,112px)}
+.block-explorer-heading{max-width:700px;margin-bottom:36px}
+.block-explorer-heading h2{margin:14px 0;font-size:clamp(34px,5.2vw,62px);line-height:1.05;letter-spacing:-.055em}
+.block-explorer-heading h2 em{color:var(--accent-hover);font-style:normal}
+.block-explorer-heading>p:last-child{max-width:540px;color:var(--muted)}
+.block-explorer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.world-block{min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:22px;border:1px solid var(--line);border-radius:var(--radius-lg);background:linear-gradient(160deg,rgba(255,255,255,.045),rgba(255,255,255,.012));color:var(--text);cursor:pointer;transition:transform .22s var(--ease),border-color .22s var(--ease),background .22s var(--ease)}
+.world-block:hover{transform:translateY(-4px);border-color:rgba(255,95,116,.45)}
+.world-block[aria-pressed=true]{border-color:rgba(255,95,116,.7);background:linear-gradient(160deg,rgba(255,41,66,.12),rgba(255,255,255,.018));box-shadow:0 14px 44px rgba(0,0,0,.2)}
+.pixel-cube{position:relative;width:74px;height:74px;margin-bottom:10px;image-rendering:pixelated;transform:rotate(-8deg);background:linear-gradient(135deg,#66844e 0 25%,#42613a 25% 50%,#314b2d 50% 75%,#4b6b3a 75%);box-shadow:12px 12px 0 rgba(0,0,0,.2),inset 0 0 0 5px rgba(0,0,0,.12)}
+.pixel-cube:before{position:absolute;content:"";inset:-12px 0 auto 0;height:12px;background:linear-gradient(90deg,#829f63 0 25%,#6e8b53 25% 50%,#8eaa6a 50% 75%,#6b8a50 75%);transform:skewX(-38deg);transform-origin:bottom left}
+.pixel-cube:after{position:absolute;content:"";top:0;right:-12px;width:12px;height:100%;background:linear-gradient(180deg,#334d2e,#253a24);transform:skewY(-38deg);transform-origin:top left}
+.pixel-cube i{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 15px,rgba(0,0,0,.09) 15px 18px),repeating-linear-gradient(90deg,transparent 0 15px,rgba(255,255,255,.035) 15px 18px)}
+.world-block--stone .pixel-cube{background:linear-gradient(135deg,#92959a 0 25%,#73777e 25% 50%,#565a62 50% 75%,#858991 75%)}
+.world-block--stone .pixel-cube:before{background:linear-gradient(90deg,#b0b3b7 0 25%,#96999e 25% 50%,#c2c4c7 50% 75%,#9a9da2 75%)}
+.world-block--stone .pixel-cube:after{background:linear-gradient(180deg,#5e6269,#41454b)}
+.world-block--ember .pixel-cube{background:linear-gradient(135deg,#786b59 0 25%,#5e5144 25% 50%,#423b35 50% 75%,#6c5d4c 75%)}
+.world-block--ember .pixel-cube:before{background:linear-gradient(90deg,#a18b6a 0 25%,#8d795e 25% 50%,#b19a75 50% 75%,#8a755a 75%)}
+.world-block--ember .pixel-cube:after{background:linear-gradient(180deg,#554537,#362d27)}
+.world-block--ember .pixel-cube i{background:radial-gradient(circle at 35% 32%,#ffb34b 0 7%,transparent 8%),radial-gradient(circle at 68% 64%,#ff6c39 0 8%,transparent 9%),radial-gradient(circle at 40% 76%,#ff8b36 0 6%,transparent 7%)}
+.world-block-name{font-size:18px;font-weight:750}
+.world-block-subtitle{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.block-explorer-detail{min-height:28px;margin:24px 0 0;padding-left:16px;border-left:2px solid var(--accent);color:var(--muted);font-size:15px}
+@media(max-width:600px){.block-explorer-grid{gap:10px}.world-block{min-height:170px;padding:14px 8px}.pixel-cube{width:54px;height:54px}.pixel-cube:before{top:-9px;height:9px}.pixel-cube:after{right:-9px;width:9px}.world-block-name{font-size:16px}.world-block-subtitle{font-size:10px;letter-spacing:.07em}}
+@media(max-width:360px){.block-explorer-grid{grid-template-columns:1fr}.world-block{min-height:135px;flex-direction:row;justify-content:flex-start;padding:18px}.pixel-cube{flex:none;margin:0 12px 0 4px}.world-block-subtitle{margin-left:auto}}
+@media(prefers-reduced-motion:reduce){.world-block{transition:none}.world-block:hover{transform:none}}
