@@ -25,7 +25,7 @@ for (const token of ["nazehard.rustix.cc", "SERVER_IP", "function cabinetPage", 
   if (js.includes(token)) errors.push("Removed feature or server address still present in app.js: " + token);
 }
 if (html.includes("/cabinet") || html.includes("data-route=\"/cabinet\"")) errors.push("index.html still links to cabinet");
-if (htaccess.includes("forum/topic") || htaccess.includes("forum-category")) errors.push(".htaccess still contains legacy forum rewrites");
+if (/RewriteRule\s+\^forum\//i.test(htaccess)) errors.push(".htaccess still contains dynamic forum route rewrites");
 try {
   const data = JSON.parse(manifest);
   if (data.schemaVersion !== 1 || data.profileVersion !== "1.0.0" || !Array.isArray(data.resources)) errors.push("launcher manifest contract mismatch");
