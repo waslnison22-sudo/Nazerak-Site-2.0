@@ -44,6 +44,15 @@ function homePage() {
      <article class="feature-card feature-card--community" data-reveal data-reveal-delay="200"><span class="feature-number">03 <i>— СООБЩЕСТВО</i></span><div class="feature-icon feature-icon--community" aria-hidden="true">◎</div><h3>Мир создают<br>люди.</h3><p>Знакомься, объединяйся и создавай совместные истории с сообществом NaZerak.</p><span class="card-index">N / 03</span></article>
    </div>
  </div></section>
+ <section class="block-explorer section" aria-labelledby="blocks-title"><div class="container">
+   <div class="block-explorer-heading" data-reveal><p class="section-kicker">02 / ИССЛЕДУЙ МИР</p><h2 id="blocks-title">Из чего начнётся<br><em>твоя история?</em></h2><p>Выбери блок, чтобы увидеть настроение своего будущего приключения.</p></div>
+   <div class="block-explorer-grid" role="group" aria-label="Выбор мира">
+     <button class="world-block world-block--forest" type="button" data-world-block="forest" aria-pressed="true"><span class="pixel-cube" aria-hidden="true"><i></i></span><span class="world-block-name">Лес</span><span class="world-block-subtitle">Исследуй</span></button>
+     <button class="world-block world-block--stone" type="button" data-world-block="stone" aria-pressed="false"><span class="pixel-cube" aria-hidden="true"><i></i></span><span class="world-block-name">Камень</span><span class="world-block-subtitle">Строй</span></button>
+     <button class="world-block world-block--ember" type="button" data-world-block="ember" aria-pressed="false"><span class="pixel-cube" aria-hidden="true"><i></i></span><span class="world-block-name">Руда</span><span class="world-block-subtitle">Открывай</span></button>
+   </div>
+   <p class="block-explorer-detail" id="block-detail" aria-live="polite">Лес — начни с исследования, найди место для дома и первых союзников.</p>
+ </div></section>
  <section class="world-section" aria-label="Мир NaZerak"><div class="world-backdrop" aria-hidden="true"></div><div class="container world-inner" data-reveal><p class="section-kicker">02 / ТВОЯ ГЛАВА</p><h2>У этого мира<br>нет готового <em>сценария.</em></h2><p>Он пишется поступками игроков. Начни с малого — и однажды именно твоя история станет частью NaZerak.</p><a class="text-link" href="#download" data-scroll-download>Начать свою историю <span aria-hidden="true">↘</span></a><div class="world-coordinate">N / ZK</div></div></section>
  <section class="connect-section section" id="download"><div class="container"><div class="connect-heading" data-reveal><p class="section-kicker">03 / НАЧАЛО ПУТИ</p><h2>В NaZerak —<br><em>через свой лаунчер.</em></h2><p>Устанавливай NaZerak Launcher и запускай игру через него. Адреса серверов вручную вводить не потребуется.</p></div>
    <div class="launcher-download-panel" data-reveal>
@@ -83,6 +92,18 @@ function render(){
 
 }
 document.addEventListener("click",async event=>{
+ const block=event.target.closest("[data-world-block]");
+ if(block){
+   const details={
+     forest:"Лес — начни с исследования, найди место для дома и первых союзников.",
+     stone:"Камень — строй, укрепляй свои позиции и создавай то, что останется в мире надолго.",
+     ember:"Руда — отправляйся на поиски редких находок и открывай новые возможности."
+   };
+   root.querySelectorAll("[data-world-block]").forEach(item=>item.setAttribute("aria-pressed",String(item===block)));
+   const detail=root.querySelector("#block-detail");
+   if(detail) detail.textContent=details[block.dataset.worldBlock]||details.forest;
+   return;
+ }
  const link=event.target.closest("a[data-route]");
  if(link&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&event.button===0){event.preventDefault();history.pushState({},"",link.getAttribute("href"));render();window.scrollTo({top:0,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});return;}
  if(event.target.closest("[data-scroll-connect]")){const section=document.querySelector("#connect");if(section){event.preventDefault();section.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});}}
