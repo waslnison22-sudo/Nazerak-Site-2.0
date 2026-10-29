@@ -1,36 +1,34 @@
-# NaZerak Site 2.0 — status log
+# NaZerak Site 2.0 — статус разработки
 
-Updated: 2026-10-21
+Обновлено: 2026-10-26
 
-## Delivered in the first version
-- Separate repository: https://github.com/waslnison22-sudo/Nazerak-Site-2.0
-- Responsive home page, navigation, clean-route renderer and honest page states.
-- Home, About section, search, privacy and 404.
-- Forum and members catalog removed from the visible interface; cabinet and launcher are non-functional placeholder controls.
-- Copy-IP interaction, mobile menu, Escape handling, focus-visible and reduced-motion support.
-- Apache clean routes plus redirects for legacy .html URLs.
-- Existing launcher manifest schema preserved exactly.
-- robots.txt, sitemap.xml, master specification, README and status log.
-- Dependency-free local preview server and route/asset smoke test.
+## Изменения в рабочей ветке
 
-## Verification
-- PASS — GitHub Actions static QA on initial version and route/launcher hardening.
-- PASS — app.js syntax check and static required-file/route/secret-marker checks.
-- PASS — launcher JSON contract and legacy rewrite markers.
-- PASS — GitHub Actions local HTTP smoke test for route fallback and static assets.
-- NOT RUN — real browser E2E and screenshots.
-- NOT RUN — actual Apache/REG.RU route behavior.
-- NOT RUN — accessibility automation and manual assistive technology review.
-- NOT RUN — live Supabase schema/RLS/grants/function/migration history audit.
-- NOT RUN — Discord OAuth round-trip and live redirect allowlist check.
-- NOT RUN — production deploy; no deployment attempted.
+- [x] Создана ветка `feat/landing-launcher-cleanup`.
+- [x] Удалён IP сервера из клиентского приложения.
+- [x] Главная страница переориентирована на NaZerak Launcher.
+- [x] Форум и веб-кабинет исключены из навигации и клиентских маршрутов.
+- [x] Добавлен блок статуса лаунчера без фиктивной прямой ссылки на установщик.
+- [x] Упрощены rewrite-правила; сохранены защитные заголовки и запрет доступа к скрытым файлам.
+- [x] Обновлены продуктовая спецификация, README и robots.
+- [ ] Обновить QA-скрипты под новую область.
+- [ ] Выполнить static QA, preview smoke и Pages build.
+- [ ] Проверить полный diff и визуально проверить страницы в браузере.
 
-## Important limitations
-Forum topics, member data, search results, profiles, moderation and account authentication are scaffolds and do not query Supabase yet. The existing Supabase project was not changed. OAuth remains disabled until exact live redirect configuration is checked. The hero uses an external 4K Minecraft forest image with a cache-busting query string; the image is not stored in the repository. The production domain remains untouched.
+## Блокер загрузки
 
-## Next batches
-1. Review actual rendered layout in a browser and add responsive screenshots.
-2. Read-only audit of legacy Supabase migrations and current Auth URL settings.
-3. Connect read-only forum/category/member queries using verified schema and RLS.
-4. Configure and test OAuth on approved redirect URLs.
-5. Complete release checklist and Apache preview smoke tests before any separate production approval.
+Проверен GitHub Releases endpoint репозитория `waslnison22-sudo/NazerakLauncher`: список релизов пуст. Публичной ссылки на готовый установщик пока нет. Сайт показывает статус «Установщик ещё не опубликован» и открывает страницу релизов.
+
+## Вне объёма
+
+Форум, каталог участников, поиск и веб-кабинет. Supabase, production `nazerak.ru`, DNS и REG.RU не изменялись.
+
+## Проверки
+
+- PASS — создана ветка.
+- PASS — код главной страницы обновлён; IP удалён из app.js.
+- PASS — проверен список GitHub Releases лаунчера.
+- NOT RUN — QA/build/smoke на финальном candidate commit.
+- NOT RUN — реальная браузерная проверка.
+- NOT RUN — Apache/REG.RU тест.
+- NOT RUN — production deploy (не выполнялся).
